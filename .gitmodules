@@ -1,0 +1,3 @@
+[submodule "dataset/ChatIR"]
+	path = dataset/ChatIR
+	url = https://github.com/levymsn/ChatIR.git
