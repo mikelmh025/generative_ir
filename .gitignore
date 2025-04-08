@@ -175,3 +175,10 @@ cython_debug/
 
 *.png
 .vscode/*
+
+results_genir/*
+genIR_images/*
+fake_images/*
+temp/*
+
+*.pyc
