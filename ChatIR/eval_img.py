@@ -513,6 +513,8 @@ def cumulative_hits_per_round(target_recall, hitting_recall=10):
 
 
 if __name__ == '__main__':
+    os.environ["CUDA_VISIBLE_DEVICES"] = '1'
+    
     cfg = {
         'corpus_bs': 2500, # 500
         'queries_bs': 2500, # 500
@@ -525,7 +527,8 @@ if __name__ == '__main__':
         # 'fake_images_dir': 'genIR_images/sd35/unlabeled2017',  # Directory containing fake images
         # 'fake_images_dir': 'genIR_images/flux/unlabeled2017',  # Directory containing fake images
         # 'fake_images_dir': 'caption_to_image_output/generated_images/'
-        'fake_images_dir': 'caption_refinement_output_try2/generated_images/',  
+        # 'fake_images_dir': 'caption_refinement_output_try2/generated_images/',  
+        'fake_images_dir': 'results_genir/caption_refinement_output_infinity/generated_images/',  # Directory containing fake images
     }
 
     with torch.no_grad():
