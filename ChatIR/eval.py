@@ -82,7 +82,7 @@ class ChatIREval:
     
     def _gemma3_text(self,batch):
         # gemma3_text_root = './caption_to_image_output/captions'
-        gemma3_text_root = './caption_refinement_output_try_veryLongCaption'
+        gemma3_text_root = './results_genir/caption_refinement_output_try_veryLongCaption'
         text_list = []
         for i in range(len(batch['text'])):
             target_name = batch['target_path'][i].split('/')[-1].split('.')[0]
@@ -102,8 +102,8 @@ class ChatIREval:
         recalls = []
         for batch in tqdm.tqdm(dataloader):
             target_ids = torch.tensor([self.corpus_dataset.path_to_index(p) for p in batch['target_path']]).unsqueeze(1).to(self.cfg['device'])
-            pred_vec = F.normalize(self.dialog_encoder(self._gemma3_text(batch)), dim=-1) # Use gemma3 text
-            # pred_vec = F.normalize(self.dialog_encoder(batch['text']), dim=-1)
+            # pred_vec = F.normalize(self.dialog_encoder(self._gemma3_text(batch)), dim=-1) # Use gemma3 text
+            pred_vec = F.normalize(self.dialog_encoder(batch['text']), dim=-1)
             # batch recalls
             scores = pred_vec @ self.corpus[1].T
             arg_ranks = torch.argsort(scores, descending=True, dim=1).long()
@@ -197,6 +197,8 @@ def cumulative_hits_per_round(target_recall, hitting_recall=10):
 
 
 if __name__ == '__main__':
+    os.environ["CUDA_VISIBLE_DEVICES"] = '1'
+    
     cfg = {'corpus_bs': 500,
            'queries_bs': 500,
            'num_workers': 64,
