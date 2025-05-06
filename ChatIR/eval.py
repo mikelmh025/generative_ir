@@ -81,12 +81,14 @@ class ChatIREval:
         return torch.cat(recalls)
     
     def _gemma3_text(self,batch):
-        # gemma3_text_root = './caption_to_image_output/captions'
-        gemma3_text_root = './results_genir/caption_refinement_output_try_veryLongCaption'
+        gemma3_text_root = './results_genir/caption_to_image_output/captions'
+        # gemma3_text_root = './results_genir/caption_refinement_output_try_veryLongCaption'
+        # gemma3_text_root = './results_genir/caption_refinement_output_12b_200t_concise/captions'
         text_list = []
         for i in range(len(batch['text'])):
             target_name = batch['target_path'][i].split('/')[-1].split('.')[0]
-            gemma3_text_path = f'{gemma3_text_root}/{target_name}_caption_0.txt'
+            # gemma3_text_path = f'{gemma3_text_root}/{target_name}_caption_0.txt'
+            gemma3_text_path = f'{gemma3_text_root}/{target_name}_caption.txt'
             _gemma3_text = []
             with open(gemma3_text_path, 'r') as f:
                 for line in f:
@@ -199,9 +201,9 @@ def cumulative_hits_per_round(target_recall, hitting_recall=10):
 if __name__ == '__main__':
     os.environ["CUDA_VISIBLE_DEVICES"] = '1'
     
-    cfg = {'corpus_bs': 500,
-           'queries_bs': 500,
-           'num_workers': 64,
+    cfg = {'corpus_bs': 2500,
+           'queries_bs': 2500,
+           'num_workers': 128,
            'sep_token': ', ',  # Separation between dialog rounds
            'cache_corpus': '',  # Cache path for saving indexed corpus
            'queries_path': 'ChatIR/dialogues/VisDial_v1.0_queries_val.json',

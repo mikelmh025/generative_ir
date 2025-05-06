@@ -16,6 +16,7 @@ from typing import Dict, List, Callable, Union, Optional
 import time
 import os.path as osp
 import random
+import argparse
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -736,23 +737,65 @@ class CaptionRefinementPipeline:
         logger.info(f"Pipeline complete! Processed in {end_time - start_time:.2f} seconds")
 
 
+
+
 if __name__ == "__main__":
-    # Create and run the pipeline with Infinity model
+    # Create argument parser
+    parser = argparse.ArgumentParser(description="Caption Refinement Pipeline using various models")
+    
+    # Add arguments
+    parser.add_argument("--input_dir", type=str, default="/data/mscoco",
+                        help="Directory containing input data")
+    parser.add_argument("--queries_path", type=str, 
+                        default="ChatIR/dialogues/VisDial_v1.0_queries_val.json",
+                        help="Path to the queries JSON file")
+    parser.add_argument("--output_dir", type=str, 
+                        default="results_genir/caption_refinement_output_infinity",
+                        help="Directory to save output results")
+    parser.add_argument("--image_subdirs", nargs="+", default=["val2017"],
+                        help="List of image subdirectories to process")
+    parser.add_argument("--max_images", type=int, default=3000,
+                        help="Maximum number of images to process")
+    parser.add_argument("--caption_model_id", type=str, default="google/gemma-3-12b-it",
+                        help="Model ID for caption generation")
+    parser.add_argument("--comparison_model_id", type=str, default="google/gemma-3-12b-it",
+                        help="Model ID for comparison")
+    parser.add_argument("--diffusion_model", type=str, default="infinity",
+                        help="Diffusion model to use")
+    parser.add_argument("--caption_gpu_id", type=int, default=1,
+                        help="GPU ID for caption model")
+    parser.add_argument("--diffusion_gpu_id", type=int, default=0,
+                        help="GPU ID for diffusion model")
+    parser.add_argument("--refinement_rounds", type=int, default=10,
+                        help="Number of refinement rounds")
+    parser.add_argument("--infinity_model_path", type=str, 
+                        default='temp/weights/infinity_model/infinity_8b_weights',
+                        help="Path to the Infinity model weights")
+    parser.add_argument("--infinity_vae_path", type=str,
+                        default='temp/weights/infinity_model/infinity_vae_d56_f8_14_patchify.pth',
+                        help="Path to the Infinity VAE weights")
+    parser.add_argument("--infinity_text_encoder_path", type=str,
+                        default='temp/weights/flan-t5-xl',
+                        help="Path to the text encoder for Infinity model")
+    
+    # Parse arguments
+    args = parser.parse_args()
+    
+    # Create and run the pipeline with parsed arguments
     pipeline = CaptionRefinementPipeline(
-        input_dir="/data/mscoco",
-        queries_path="ChatIR/dialogues/VisDial_v1.0_queries_val.json",
-        output_dir="results_genir/caption_refinement_output_infinity",
-        image_subdirs=["val2017"],  # Process only validation images
-        max_images=3000,  # Limit to 10 images for testing
-        caption_model_id="google/gemma-3-12b-it",
-        comparison_model_id="google/gemma-3-12b-it",
-        diffusion_model="infinity",  # Use Infinity model
-        caption_gpu_id=1,
-        diffusion_gpu_id=0,
-        refinement_rounds=10,
-        # Infinity model paths
-        infinity_model_path='temp/weights/infinity_model/infinity_8b_weights',
-        infinity_vae_path='temp/weights/infinity_model/infinity_vae_d56_f8_14_patchify.pth',
-        infinity_text_encoder_path='temp/weights/flan-t5-xl',
+        input_dir=args.input_dir,
+        queries_path=args.queries_path,
+        output_dir=args.output_dir,
+        image_subdirs=args.image_subdirs,
+        max_images=args.max_images,
+        caption_model_id=args.caption_model_id,
+        comparison_model_id=args.comparison_model_id,
+        diffusion_model=args.diffusion_model,
+        caption_gpu_id=args.caption_gpu_id,
+        diffusion_gpu_id=args.diffusion_gpu_id,
+        refinement_rounds=args.refinement_rounds,
+        infinity_model_path=args.infinity_model_path,
+        infinity_vae_path=args.infinity_vae_path,
+        infinity_text_encoder_path=args.infinity_text_encoder_path,
     )
     pipeline.run()

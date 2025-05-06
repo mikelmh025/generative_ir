@@ -475,7 +475,6 @@ class CaptionRefinementPipeline:
                 with open(image_caption_0_path, 'w') as f:
                     f.write(initial_caption)
                 
-                continue
                 
                 # Generate initial image
                 generated_image_0 = self._generate_image(initial_caption)
