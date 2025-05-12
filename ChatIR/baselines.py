@@ -10,10 +10,11 @@ class ImageEmbedder:
         self.processor = preprocessor
 
 
-def CLIP_ZERO_SHOT_BASELINE():
+def CLIP_ZERO_SHOT_BASELINE(device=None):
     # Install CLIP library from https://github.com/openai/CLIP
     import clip
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    if not device:
+        device = "cuda" if torch.cuda.is_available() else "cpu"
     # model, preprocess = clip.load("ViT-B/32", device='cpu')
     model, preprocess = clip.load("ViT-B/16", device='cpu')
     model = model.to(device)
@@ -24,7 +25,7 @@ def CLIP_ZERO_SHOT_BASELINE():
     return dialog_encoder, image_embedder
 
 
-def BLIP_BASELINE():
+def BLIP_BASELINE(device=None):
     from torchvision import transforms
     from torchvision.transforms.functional import InterpolationMode
 
@@ -41,7 +42,8 @@ def BLIP_BASELINE():
                      image_size=224,
                      vit='base')
 
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    if not device:
+        device = "cuda" if torch.cuda.is_available() else "cpu"
     model = model.to(device).eval()
 
     # define Image Embedder (raw_image --> img_feature)

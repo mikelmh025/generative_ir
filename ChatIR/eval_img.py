@@ -534,7 +534,7 @@ if __name__ == '__main__':
         'queries_path': args.queries_path,
         'corpus_path': args.corpus_path,
         'img_root': args.img_root,
-        'device': 'cuda:0',
+        'device': 'cuda',
         'fake_images_dir': args.fake_images_dir,
     }
 

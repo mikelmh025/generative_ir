@@ -383,7 +383,7 @@ class CaptionRefinementPipeline:
         messages = [
             {
                 "role": "system",
-                "content": [{"type": "text", "text": "You are an image analysis assistant that compares original images with their synthetically generated versions, highlighting important differences that need to be addressed in caption refinement."}]
+                "content": [{"type": "text", "text": f"You are an image analysis assistant that compares original images with their synthetically generated versions, highlighting important differences that need to be addressed in caption refinement. Keep your analysis under {max_tokens} tokens."}]
             },
             {
                 "role": "user",
