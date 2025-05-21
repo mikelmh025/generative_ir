@@ -1,24 +1,95 @@
-# diffusion_ir
+# GenIR: Generative Visual Feedback for Mental Image Retrieval
+
+This repository contains the supplementary material for our NeurIPS 2025 paper "GenIR: Generative Visual Feedback for Mental Image Retrieval".
+
+## Overview
+
+This repository implements our proposed GenIR framework for mental image retrieval using multi-round caption refinement. The framework leverages generative models to improve retrieval performance through iterative refinement of image captions. While we primarily use Stable Diffusion 3.5 (SD3.5) and Gemma-3-4B in our experiments due to their ease of weight sharing, the framework is flexible and supports other generative models.
+
+## Installation
+
+```bash
+# Add installation instructions here
+```
+
+## Dataset
+
+### MSCOCO Dataset
+We use the MSCOCO 2017 Unlabeled images dataset (123K images, 19GB) for our experiments.
+- Download from: [COCO Dataset](https://cocodataset.org/#download)
+- After downloading, organize the dataset in the following structure:
+  ```
+  data/
+  └── mscoco/
+      └── unlabeled2017/
+          └── [image files]
+  ```
+- The required JSON files for queries and corpus are provided in the `ChatIR` folder
+
+## Running Experiments
+
+### Run GenIR Pipeline
+We provide three different implementations:
+
+- **GenIR (Ours)**: Fake image feedback using generative models (default: SD3.5 and Gemma-3-4B)
+  ```bash
+  python genIR_CaptionImageRefinement.py
+  ```
+
+- **Baseline 1**: Prediction feedback
+  ```bash
+  python genIR_CaptionRefinment_VIsualPredictionFeedBack.py 
+  ```
+
+- **Baseline 2**: Textual feedback
+  ```bash
+  python genIR_CaptionRefinment_TextOnly.py 
+  ```
+
+### Evaluation
+
+- **GenIR Evaluation**: Evaluate fake image to real image retrieval
+  ```bash
+  python ChatIR/eval_img.py 
+  ```
+
+- **Text-only Baseline Evaluation**
+  ```bash
+  python ChatIR/eval_textonly.py 
+  ```
+
+## Acknowledgments
+
+This work builds upon several previous works:
+- [ChatIR](https://github.com/levymsn/ChatIR) - For the base implementation and evaluation framework
+- [BLIP](https://github.com/levymsn/ChatIR) - For the vision-language model components
+- [Infinity](https://github.com/FoundationVision/Infinity.git) - For the generative model implementations
+- [FLUX.1-dev](https://huggingface.co/black-forest-labs/FLUX.1-dev) - For the text-to-image generation capabilities
+
+This is an academic research project. Feel free to use this code for research purposes.
+
+## License
+
+MIT License
+
+Copyright (c) 2025 [Your Institution]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 
-
-## How to run experiments on new datasets
-
-1. Create json files of quries and corpus
-- python create_ffhq_json.py 
-2. Run genIR pipeline. (Multi rounds caption refinement)
-- genIR_CaptionImageRefinement.py: Fake image feedback (Ours)
-- genIR_CaptionRefinment_VIsualPredictionFeedBack.py: Prediction feedback (Baseline)
-- genIR_CaptionRefinment_TextOnly.py: Textual feedback (Baseline)
-
-3. Eval 
-- python ChatIR/eval_img.py: Fake image to real image eval. (Eval ours)
-- python ChatIR/eval_textonly.py: text only eval. (Eval Text only baseline)
-
-
-## Get Infinity code
-git clone https://github.com/FoundationVision/Infinity.git
-
-## MSCOCO dataset
-2017 Unlabeled images [123K/19GB]
-https://cocodataset.org/#download
