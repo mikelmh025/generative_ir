@@ -12,12 +12,17 @@ python genIR_CaptionRefinment_TextOnly.py --model_id=google/gemma-3-4b-it --outp
 
 python genIR_CaptionRefinment_TextOnly.py --model_id=google/gemma-3-4b-it --output_dir=results_genir/self_dialogue_caption_output_gemma_3_4b_it --gpu_id=1
 
+python genIR_CaptionImageRefinement_wIF.py --caption_model_id=google/gemma-3-4b-it --comparison_model_id=google/gemma-3-4b-it --output_dir=results_genir/caption_refinement_output_infinity_4b
+
 python genIR_CaptionRefinment_VIsualPredictionFeedBack.py --caption_model_id=google/gemma-3-12b-it --output_dir=results_genir/visual_prediction_feedback_output_12b
 
 # external_text_root=results_genir/visual_prediction_feedback_output/captions
-external_text_root=results_genir/visual_prediction_feedback_output_12b/captions
+# external_text_root=results_genir/visual_prediction_feedback_output_12b/captions
+# external_text_root=results_genir/caption_refinement_output_infinity/captions
+# external_text_root=results_genir/caption_refinement_output_infinity_4b/captions
+external_text_root=results_genir/self_dialogue_caption_output_gemma_3_12b_it/captions
 python ChatIR/eval_textonly_w_incompletete.py \
-    --cuda_device='0' \
+    --cuda_device='1' \
     --baseline='blip-zero-shot' \
     --cache_corpus='temp/corpus_blip_small.pth' \
     --corpus_bs=500 \
@@ -25,6 +30,17 @@ python ChatIR/eval_textonly_w_incompletete.py \
     --external_text_root=$external_text_root \
     --hits_at=10
 
+
+# MSCOCO Eval - Fake Images
+fake_images_dir='results_genir/caption_refinement_output_infinity_4b/generated_images/'
+python ChatIR/eval_img.py \
+    --cuda_device='1' \
+    --baseline='blip-zero-shot' \
+    --cache_corpus='temp/corpus_blip_small.pth' \
+    --corpus_bs=500 \
+    --num_workers=64 \
+    --fake_images_dir=$fake_images_dir \
+    --hits_at=10
 
 
 ####################################################################################################
@@ -36,6 +52,9 @@ python genIR_CaptionRefinment_TextOnly.py --model_id=google/gemma-3-4b-it --inpu
 
 # FFHQ Run - Visual Prediction Feedback
 python genIR_CaptionRefinment_VIsualPredictionFeedBack.py --caption_model_id=google/gemma-3-4b-it --output_dir=results_genir/visual_prediction_feedback_output_4b_FFHQ --caption_gpu_id=0 --retrieval_gpu_id=0 --max_images=500 --input_dir='/data/skin_gen_data/ffhq/images' --max_images=500 --queries_path='ffhq_data/ffhq_queries_2000.json' --cache_corpus='temp/corpus_blip_small_ffhq.pth' --corpus_path='ffhq_data/ffhq_corpus_all.json' --corpus_bs=500 --num_workers=64
+
+# FFHQ Run - Visual Prediction Feedback 12B
+python genIR_CaptionRefinment_VIsualPredictionFeedBack.py --caption_model_id=google/gemma-3-12b-it --output_dir=results_genir/visual_prediction_feedback_output_12b_FFHQ --caption_gpu_id=1 --retrieval_gpu_id=1 --max_images=500 --input_dir='/data/skin_gen_data/ffhq/images' --max_images=500 --queries_path='ffhq_data/ffhq_queries_2000.json' --cache_corpus='temp/corpus_blip_small_ffhq.pth' --corpus_path='ffhq_data/ffhq_corpus_all.json' --corpus_bs=500 --num_workers=64
 
 # FFHQ Run Ours Pipeline
 # --image_subdirs?
@@ -59,7 +78,8 @@ external_text_root=results_genir/self_dialogue_caption_ffhq-12b-q2k/captions # 1
 # external_text_root=results_genir/self_dialogue_caption_ffhq-4b/captions # 4b initial try
 # external_text_root=results_genir/self_dialogue_caption_ffhq-12b/captions # 12b initial try
 
-external_text_root=results_genir/visual_prediction_feedback_output_4b_FFHQ/captions
+# external_text_root=results_genir/visual_prediction_feedback_output_4b_FFHQ/captions
+external_text_root=results_genir/visual_prediction_feedback_output_12b_FFHQ/captions
 
 python ChatIR/eval_textonly_w_incompletete.py \
     --cuda_device='1' \
@@ -237,7 +257,7 @@ python genIR_CaptionImageRefinement_wIF.py \
     --caption_model_id=$language_model \
     --comparison_model_id=$language_model \
     --output_dir=$output_dir \
-    --max_images=1000
+    --max_images=500
 
 # Option 2: 4B model
 language_model='google/gemma-3-4b-it'
@@ -248,16 +268,16 @@ python genIR_CaptionImageRefinement_wIF.py \
     --caption_model_id=$language_model \
     --comparison_model_id=$language_model \
     --output_dir=$output_dir \
-    --max_images=1000
+    --max_images=500
 
 # Flickr30k Eval - Text Only
 # Choose one of these external_text_root options based on which model you want to evaluate
-external_text_root=results_genir/self_dialogue_caption_flickr30k-4b/captions  # 4b model
-# external_text_root=results_genir/self_dialogue_caption_flickr30k-12b/captions  # 12b model
+# external_text_root=results_genir/self_dialogue_caption_flickr30k-4b/captions  # 4b model
+external_text_root=results_genir/self_dialogue_caption_flickr30k-12b/captions  # 12b model
 # external_text_root=results_genir/visual_prediction_feedback_output_4b_flickr30k/captions  # Visual prediction feedback
 
 python ChatIR/eval_textonly_w_incompletete.py \
-    --cuda_device='1' \
+    --cuda_device='0' \
     --baseline='blip-zero-shot' \
     --cache_corpus='temp/corpus_blip_small_flickr30k.pth' \
     --queries_path='flickr30k_data/flickr30k_queries_2000.json' \
@@ -270,8 +290,8 @@ python ChatIR/eval_textonly_w_incompletete.py \
 
 # Flickr30k Eval - Fake Images
 # Choose one of these fake_images_dir options based on which model to evaluate
-fake_images_dir='results_genir/caption_refinement_output_infinity-12b-flickr30k/generated_images/'
-# fake_images_dir='results_genir/caption_refinement_output_infinity-4b-flickr30k/generated_images/'
+# fake_images_dir='results_genir/caption_refinement_output_infinity-12b-flickr30k/generated_images/'
+fake_images_dir='results_genir/caption_refinement_output_infinity-4b-flickr30k/generated_images/'
 
 python ChatIR/eval_img.py \
     --cuda_device='1' \
