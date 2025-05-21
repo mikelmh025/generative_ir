@@ -353,8 +353,8 @@ if __name__ == "__main__":
     model, processor = setup_gemma_model(model_id="google/gemma-3-4b-it", gpu_ids="0")
     
     # Example image paths
-    real_image_path = "/home/minghao/Documents/diffusion_ir/genIR_images/sd35/unlabeled2017/000000029869.jpg"
-    fake_image_path = "/home/minghao/Documents/diffusion_ir/genIR_images/sd35/unlabeled2017/000000029869_0.jpg"
+    real_image_path = "./genIR_images/sd35/unlabeled2017/000000029869.jpg"
+    fake_image_path = "./genIR_images/sd35/unlabeled2017/000000029869_0.jpg"
     
     # Full pipeline with default settings
     result = complete_caption_pipeline_with_fake(real_image_path, fake_image_path, model, processor)

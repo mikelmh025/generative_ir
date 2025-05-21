@@ -31,8 +31,8 @@ def BLIP_BASELINE(device=None):
 
     import sys
     # sys.path.insert(0, './BLIP')
-    sys.path.append('/home/minghao/Documents/diffusion_ir/BLIP')
-    sys.path.append('/home/minghao/Documents/diffusion_ir/')
+    sys.path.append('./BLIP')
+    sys.path.append('./')
     from BLIP.models.blip_itm import blip_itm
     # load model
     model = blip_itm(

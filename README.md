@@ -10,5 +10,9 @@
 - genIR_CaptionRefinment_TextOnly.py: Image -> Text
 - genIR_CaptionImageRefinement.py: Text -> Fake Image
 3. Eval 
-- python ChatIR/eval_textonly_w_incompletete.py: text only eval. Supported incomplete queries
-- python ChatIR/eval_img.py: Fake image to real image eval. Supported incomplete queries
+- python ChatIR/eval_textonly_w_incompletete.py: text only eval. 
+- python ChatIR/eval_img.py: Fake image to real image eval. 
+
+
+## Get Infinity code
+git clone https://github.com/FoundationVision/Infinity.git

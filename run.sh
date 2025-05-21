@@ -12,7 +12,7 @@ python genIR_CaptionRefinment_TextOnly.py --model_id=google/gemma-3-4b-it --outp
 
 python genIR_CaptionRefinment_TextOnly.py --model_id=google/gemma-3-4b-it --output_dir=results_genir/self_dialogue_caption_output_gemma_3_4b_it --gpu_id=1
 
-python genIR_CaptionImageRefinement_wIF.py --caption_model_id=google/gemma-3-4b-it --comparison_model_id=google/gemma-3-4b-it --output_dir=results_genir/caption_refinement_output_infinity_4b
+python genIR_CaptionImageRefinement.py --caption_model_id=google/gemma-3-4b-it --comparison_model_id=google/gemma-3-4b-it --output_dir=results_genir/caption_refinement_output_infinity_4b
 
 python genIR_CaptionRefinment_VIsualPredictionFeedBack.py --caption_model_id=google/gemma-3-12b-it --output_dir=results_genir/visual_prediction_feedback_output_12b
 
@@ -62,7 +62,7 @@ language_model='google/gemma-3-12b-it'
 output_dir='results_genir/caption_refinement_output_infinity-12b-FFHQ-q2k'
 # language_model='google/gemma-3-4b-it'
 # output_dir='results_genir/caption_refinement_output_infinity-4b-FFHQ-q2k'
-python genIR_CaptionImageRefinement_wIF.py \
+python genIR_CaptionImageRefinement.py \
     --input_dir='/data/skin_gen_data/ffhq/images' \
     --queries_path='ffhq_data/ffhq_queries_2000.json' \
     --caption_model_id=$language_model \
@@ -139,7 +139,7 @@ python genIR_CaptionRefinment_VIsualPredictionFeedBack.py --caption_model_id=goo
 # For 12B model
 language_model='google/gemma-3-12b-it'
 output_dir='results_genir/caption_refinement_output_infinity-12b-clothingADC-q2k'
-python genIR_CaptionImageRefinement_wIF.py \
+python genIR_CaptionImageRefinement.py \
     --input_dir='/data/cloth1m/v4/cloth1m_data_v4/images' \
     --queries_path='clothingadc_data/clothingadc_queries_2000.json' \
     --caption_model_id=$language_model \
@@ -150,7 +150,7 @@ python genIR_CaptionImageRefinement_wIF.py \
 # For 4B model
 language_model='google/gemma-3-4b-it'
 output_dir='results_genir/caption_refinement_output_infinity-4b-clothingADC-q2k'
-python genIR_CaptionImageRefinement_wIF.py \
+python genIR_CaptionImageRefinement.py \
     --input_dir='/data/cloth1m/v4/cloth1m_data_v4/images' \
     --queries_path='clothingadc_data/clothingadc_queries_2000.json' \
     --caption_model_id=$language_model \
@@ -251,7 +251,7 @@ python genIR_CaptionRefinment_VIsualPredictionFeedBack.py --caption_model_id=goo
 # Option 1: 12B model
 language_model='google/gemma-3-12b-it'
 output_dir='results_genir/caption_refinement_output_infinity-12b-flickr30k'
-python genIR_CaptionImageRefinement_wIF.py \
+python genIR_CaptionImageRefinement.py \
     --input_dir='/data/flickr30k/flickr30k-images' \
     --queries_path='flickr30k_data/flickr30k_queries_2000.json' \
     --caption_model_id=$language_model \
@@ -262,7 +262,7 @@ python genIR_CaptionImageRefinement_wIF.py \
 # Option 2: 4B model
 language_model='google/gemma-3-4b-it'
 output_dir='results_genir/caption_refinement_output_infinity-4b-flickr30k'
-python genIR_CaptionImageRefinement_wIF.py \
+python genIR_CaptionImageRefinement.py \
     --input_dir='/data/flickr30k/flickr30k-images' \
     --queries_path='flickr30k_data/flickr30k_queries_2000.json' \
     --caption_model_id=$language_model \
@@ -304,3 +304,16 @@ python ChatIR/eval_img.py \
     --num_workers=64 \
     --fake_images_dir=$fake_images_dir \
     --hits_at=10
+
+
+
+
+# Dev for supplymenatary
+language_model='google/gemma-3-4b-it'
+output_dir='results_genir/dev_supplymenatary'
+python genIR_CaptionImageRefinement.py \
+    --caption_model_id=$language_model \
+    --comparison_model_id=$language_model \
+    --output_dir=$output_dir \
+    --diffusion_model='flux' \
+    --max_images=1 

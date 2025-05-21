@@ -501,7 +501,7 @@ class CaptionRefinementPipeline:
                 height=1024,
                 width=1024,
                 guidance_scale=3.5,
-                num_inference_steps=5,
+                num_inference_steps=50,
                 max_sequence_length=512,
                 generator=torch.Generator("cpu").manual_seed(0)
             ).images[0]
@@ -756,11 +756,11 @@ if __name__ == "__main__":
                         help="List of image subdirectories to process")
     parser.add_argument("--max_images", type=int, default=3000,
                         help="Maximum number of images to process")
-    parser.add_argument("--caption_model_id", type=str, default="google/gemma-3-12b-it",
+    parser.add_argument("--caption_model_id", type=str, default="google/gemma-3-4b-it",
                         help="Model ID for caption generation")
-    parser.add_argument("--comparison_model_id", type=str, default="google/gemma-3-12b-it",
+    parser.add_argument("--comparison_model_id", type=str, default="google/gemma-3-4b-it",
                         help="Model ID for comparison")
-    parser.add_argument("--diffusion_model", type=str, default="infinity",
+    parser.add_argument("--diffusion_model", type=str, default="sd35",
                         help="Diffusion model to use")
     parser.add_argument("--caption_gpu_id", type=int, default=1,
                         help="GPU ID for caption model")

@@ -106,11 +106,11 @@ if __name__ == "__main__":
     model, processor = setup_comparison_model(model_id="google/gemma-3-12b-it", gpu_ids="0")
     
     # Example image paths
-    image1_path = "/home/minghao/Documents/diffusion_ir/results_genir/caption_refinement_output/image_000000000648/original.jpg"   # Demo purpose, I am note sure if the fake image here is actually wrong
-    image2_path = "/home/minghao/Documents/diffusion_ir/results_genir/caption_refinement_output/image_000000000648/generated_images/generated_0.jpg"  # Another image for comparison
+    image1_path = "./results_genir/caption_refinement_output/image_000000000648/original.jpg"   # Demo purpose, I am note sure if the fake image here is actually wrong
+    image2_path = "./results_genir/caption_refinement_output/image_000000000648/generated_images/generated_0.jpg"  # Another image for comparison
     
     # Original caption
-    caption_paht = "/home/minghao/Documents/diffusion_ir/results_genir/caption_refinement_output/image_000000000648/captions/caption_0.txt"
+    caption_paht = "./results_genir/caption_refinement_output/image_000000000648/captions/caption_0.txt"
     with open(caption_paht, "r") as f:
         original_caption = f.read()
     print("Original Caption:")
