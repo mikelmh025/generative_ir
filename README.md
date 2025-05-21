@@ -6,11 +6,6 @@ This repository contains the supplementary material for our NeurIPS 2025 paper "
 
 This repository implements our proposed GenIR framework for mental image retrieval using multi-round caption refinement. The framework leverages generative models to improve retrieval performance through iterative refinement of image captions. While we primarily use Stable Diffusion 3.5 (SD3.5) and Gemma-3-4B in our experiments due to their ease of weight sharing, the framework is flexible and supports other generative models.
 
-## Installation
-
-```bash
-# Add installation instructions here
-```
 
 ## Dataset
 
