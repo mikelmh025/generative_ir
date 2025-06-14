@@ -66,6 +66,13 @@ GenIR demonstrates significant improvements over existing interactive retrieval 
 # Usage examples will be available here
 ```
 
+## Contact
+
+For questions or discussions, please contact:
+- Diji Yang: dyang39@ucsc.edu
+- Minghao Liu: mliu40@ucsc.edu
+
+
 ## Citation
 
 If you find this work useful for your research, please cite:
@@ -78,37 +85,3 @@ If you find this work useful for your research, please cite:
   year={2025}
 }
 ```
-
-## Authors
-
-- **Diji Yang**¹* - University of California Santa Cruz
-- **Minghao Liu**¹* - University of California Santa Cruz  
-- **Chung-Hsiang Lo**² - Northeastern University
-- **Yi Zhang**¹ - University of California Santa Cruz
-- **James Davis**¹ - University of California Santa Cruz
-
-*Equal contribution
-
-## Contact
-
-For questions or collaborations, please contact:
-- Diji Yang: dyang39@ucsc.edu
-- Minghao Liu: mliu40@ucsc.edu
-
-## Project Links
-
-- 📄 [Paper (arXiv)](https://arxiv.org/abs/2506.06220)
-- 🌐 [Project Page](https://visual-generative-ir.github.io)
-- 💻 [Code Repository](https://github.com/mikelmh025/generative_ir) (Coming Soon)
-
-## License
-
-> **Coming Soon**: License information will be provided when the code is released.
-
-## Acknowledgments
-
-We thank the reviewers and collaborators who provided valuable feedback on this work.
-
----
-
-**Status**: This repository is actively being prepared for public release. Star and watch this repo to get notified when code and data become available!
