@@ -2,7 +2,6 @@
 
 [![arXiv](https://img.shields.io/badge/arXiv-2506.06220-b31b1b.svg)](https://arxiv.org/abs/2506.06220)
 [![Project Page](https://img.shields.io/badge/Project-Page-green)](https://visual-generative-ir.github.io)
-[![Under Review](https://img.shields.io/badge/Status-Under%20Review-orange)](#)
 
 > **Note**: This work is currently under review. Code and data will be released soon.
 
