@@ -67,7 +67,7 @@ from huggingface_hub import snapshot_download
 
 # Download the dataset
 snapshot_download(
-    repo_id="generative_ir/GenIR",
+    repo_id="dyang39/GenIR",
     repo_type="dataset",
     local_dir="./data/GenIR_dataset_MSCOCO"
 )
