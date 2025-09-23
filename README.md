@@ -73,7 +73,7 @@ snapshot_download(
 )
 ```
 
-**Direct link**: [https://huggingface.co/datasets/generative_ir/GenIR](https://huggingface.co/datasets/generative_ir/GenIR)
+**Direct link**: [https://huggingface.co/datasets/dyang39/GenIR](https://huggingface.co/datasets/dyang39/GenIR)
 
 ## Installation
 
