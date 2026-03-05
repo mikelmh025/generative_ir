@@ -1,0 +1,21 @@
+# Core ML frameworks (install torch/torchvision for your CUDA version:
+# https://pytorch.org/get-started/locally/)
+torch
+torchvision
+
+# Hugging Face libraries
+transformers>=4.49.0
+diffusers
+
+# BLIP model dependencies
+timm==0.4.12
+fairscale==0.4.4
+
+# OpenAI CLIP (used by ChatIR baselines)
+git+https://github.com/openai/CLIP.git
+
+# General utilities
+tqdm
+numpy
+opencv-python
+Pillow

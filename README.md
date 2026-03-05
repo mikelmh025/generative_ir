@@ -79,6 +79,19 @@ snapshot_download(
 
 This repository implements our proposed GenIR framework for mental image retrieval using multi-round caption refinement. The framework leverages generative models to improve retrieval performance through iterative refinement of image captions. While we primarily use Stable Diffusion 3.5 (SD3.5) and Gemma-3-4B in our experiments due to their ease of weight sharing, the framework is flexible and supports other generative models.
 
+### Clone & Submodule Setup
+
+```bash
+git clone <repo-url>
+cd generative_ir
+git submodule update --init --recursive
+```
+
+> **Note:** The Infinity submodule has additional dependencies. If you plan to use the Infinity model, also run:
+> ```bash
+> pip install -r Infinity/requirements.txt
+> ```
+
 ### Requirements
 
 ```bash
@@ -126,7 +139,7 @@ GenIR demonstrates significant improvements over existing interactive retrieval 
 
 This work builds upon several previous works:
 - [ChatIR](https://github.com/levymsn/ChatIR) - For the base implementation and evaluation framework
-- [BLIP](https://github.com/levymsn/ChatIR) - For the vision-language model components
+- [BLIP](https://github.com/salesforce/BLIP) - For the vision-language model components
 - [Infinity](https://github.com/FoundationVision/Infinity.git) - For the generative model implementations
 - [FLUX.1-dev](https://huggingface.co/black-forest-labs/FLUX.1-dev) - For the text-to-image generation capabilities
 
