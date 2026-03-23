@@ -133,7 +133,7 @@ We provide three different implementations:
 ### Evaluation Protocol & Replicability
 
 
-- **Test Set Size**: For each dataset (MSCOCO, FFHQ, Flickr30k, and Clothing-ADC), we randomly sample 2,000 images from their respective validation or test sets.
+- **Test Set Size**: For each dataset ([MSCOCO](https://cocodataset.org/), [FFHQ](https://github.com/NVlabs/ffhq-dataset), [Flickr30k](https://shannon.cs.illinois.edu/DenotationGraph/), and [Clothing-ADC](https://huggingface.co/datasets/mikelmh025/ClothingADC)), we randomly sample 2,000 images from their respective validation or test sets.
 - **Search Space**: During evaluation, the retrieval system searches against the entire database of each dataset (e.g., evaluating against all 1M+ images for Clothing-ADC). This ensures a realistic and challenging large-scale retrieval scenario.
 - **Compute-Efficient Replication**: Empirically, we observed that the Hits@K metrics stabilize after approximately **500 samples**, with no significant statistical changes thereafter. For those looking to replicate our framework or test follow-up methods with limited compute, a minimum of 500 samples is recommended.
 
