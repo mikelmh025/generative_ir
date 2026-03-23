@@ -2,10 +2,10 @@
 
 [![arXiv](https://img.shields.io/badge/arXiv-2506.06220-b31b1b.svg)](https://arxiv.org/abs/2506.06220)
 [![Project Page](https://img.shields.io/badge/Project-Page-green)](https://visual-generative-ir.github.io)
+[![NeurIPS](https://img.shields.io/badge/NeurIPS-2025-blue.svg)](https://arxiv.org/abs/2506.06220)
 
 ## Overview
-
-GenIR introduces a novel approach to **Mental Image Retrieval (MIR)** - a realistic search scenario where users iteratively refine their queries based on mental images to retrieve intended images from a database. Unlike traditional one-shot text-to-image retrieval, our method addresses the multi-round, interactive nature of real-world human search behavior.
+This is the official repository for the paper *GenIR: Generative Visual Feedback for Mental Image Retrieval* (NeurIPS 2025). GenIR introduces a novel approach to **Mental Image Retrieval (MIR)** - a realistic search scenario where users iteratively refine their queries based on mental images to retrieve intended images from a database. Unlike traditional one-shot text-to-image retrieval, our method addresses the multi-round, interactive nature of real-world human search behavior.
 
 ### Key Contributions
 
@@ -130,6 +130,12 @@ We provide three different implementations:
   ```bash
   python ChatIR/eval_textonly.py 
   ```
+### Evaluation Protocol & Replicability
+
+
+- **Test Set Size**: For each dataset (MSCOCO, FFHQ, Flickr30k, and Clothing-ADC), we randomly sample 2,000 images from their respective validation or test sets.
+- **Search Space**: During evaluation, the retrieval system searches against the entire database of each dataset (e.g., evaluating against all 1M+ images for Clothing-ADC). This ensures a realistic and challenging large-scale retrieval scenario.
+- **Compute-Efficient Replication**: Empirically, we observed that the Hits@K metrics stabilize after approximately **500 samples**, with no significant statistical changes thereafter. For those looking to replicate our framework or test follow-up methods with limited compute, a minimum of 500 samples is recommended.
 
 ## Results
 
